@@ -17,6 +17,7 @@ public:
                 cur = cur->next;
                 continue;
             }
+            //**//
             if(l1 != NULL ){
                 cur->next = new ListNode((l1->val + carry) % 10);
                 carry = (l1->val + carry) / 10;
