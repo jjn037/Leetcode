@@ -1,0 +1,51 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+public:
+    void huisu(vector<int>& candidates, vector<vector<int>>& ret, int start,int target, vector<int> temp){
+        if(target==0){
+            ret.push_back(temp);
+            return;
+        }
+        if(target < 0 ) return ;
+        for(int i=start; i != candidates.size(); ++i){
+            if(i&&candidates[i]==candidates[i-1]&&i>start) continue;
+            temp.push_back(candidates[i]);
+            huisu(candidates, ret, i+1, target-candidates[i], temp);
+            temp.pop_back();
+//            while(candidates[i]==candidates[i+1]) i++;
+        }
+    }
+
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        sort(candidates.begin(), candidates.end());
+        vector<vector<int>>ret;
+        huisu(candidates, ret, 0, target, vector<int>());
+        return ret;
+    }
+};
+
+int main() {
+    int a[] = {5,2,1,1,4,2,1};
+    int len = sizeof(a) / sizeof(a[0]);
+    vector<int> num(a, a+len);
+    Solution s;
+    vector< vector<int> > result;
+    result = s.combinationSum(num, 5);
+    // 输出结果
+    for(int q = 0; q < result.size(); q++) {
+        vector<int> x = result[q];
+        cout << "(";
+        int t;
+        for(t = 0; t < x.size()-1; t++) {
+            cout << x[t] << " ";
+        }
+        cout << x[t];
+        cout << ")" << endl;
+    }
+
+    return 0;
+}
