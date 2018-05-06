@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int reverse(int x) {
+        int sign = 0;
+        int ret=0;
+        // if(x==NULL) return ;
+        if(x<0)
+        {
+            sign = 1;
+            x = -x;
+            cout << x << endl;
+        }
+        while(x>0)
+        {
+            if(ret >INT_MAX/10 || ret>INT_MAX/10 && (x/10%10)> INT_MAX%10) return 0;    //计算过程若超过INT_MAX，结果一样会无效
+            ret = (x%10) + ret * 10;
+            x /= 10;
+            
+        }
+        // if((x%10) + ret * 10>INT_MAX) return 0;
+        // ret = ret*10 + x;
+        if(sign) ret = -ret;
+        return ret;
+    }
+};
